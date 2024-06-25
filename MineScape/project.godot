@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="MineScape"
+run/main_scene="res://scenes/mine/mine.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=990
+window/size/viewport_height=900
 
 [input]
 

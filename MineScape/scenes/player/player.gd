@@ -21,7 +21,6 @@ func _physics_process(delta):
 	get_input()
 	calculate_state()
 	move_and_slide()
-	
 
 func calculate_state():
 
@@ -47,11 +46,9 @@ func calculate_state():
 func set_state(new_state: PLAYER_STATES):
 	
 	if new_state != current_state:
-		
+	
 	#	if current_state == PLAYER_STATES.FALL and is_on_floor():
 		#	touch_flood = true
-			
-		
 		
 		current_state = new_state
 		match current_state:
@@ -79,14 +76,9 @@ func get_input():
 		
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = -JUMP_FORCE
-	
-
 
 func apply_gravity(delta: float):
 	velocity.y += GRAVITY * delta
-	
-
-
 
 func _on_animation_player_animation_finished(touch_flood):
 	set_state(PLAYER_STATES.IDLE)
