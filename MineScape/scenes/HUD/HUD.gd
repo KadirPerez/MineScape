@@ -1,11 +1,13 @@
 extends Control
 
+@onready var hearts_container = $MarginContainer/HBoxContainer/HeartsContainer
 
-# Called when the node enters the scene tree for the first time.
+var hearts: Array
+
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	SignalManager.on_update_lives.connect(update_lives)
+	hearts = hearts_container.get_children()
+	
+func update_lives(lives: int):
+	for heart_index in range(hearts.size()):
+		hearts[heart_index].visible = heart_index < lives

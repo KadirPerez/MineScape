@@ -7,7 +7,11 @@ var random =RandomNumberGenerator.new()
 
 func _ready()->void:
 	random.randomize() 
+	SignalManager.on_game_over.connect(on_game_over)
 
+func on_game_over():
+	queue_free()
+	
 func _process(delta:float)->void:
 	spawn()
 	

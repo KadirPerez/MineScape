@@ -529,15 +529,18 @@ position = Vector2(31, 703)
 [node name="Ladder6" parent="." instance=ExtResource("4_nnwi0")]
 position = Vector2(961, 831)
 
-[node name="Player" parent="." instance=ExtResource("5_8onw5")]
-position = Vector2(167, 347)
+[node name="SpawnRock" parent="." instance=ExtResource("7_wb0e8")]
+position = Vector2(704, -20)
+
+[node name="SpawnRock" parent="SpawnRock" instance=ExtResource("7_wb0e8")]
+position = Vector2(191, 597)
 
 [node name="Lava" parent="." instance=ExtResource("3_gfwwu")]
-position = Vector2(-36, 2109)
+position = Vector2(-79, 2206)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("6_y3mhy")]
 
-[node name="SpawnRock" parent="." instance=ExtResource("7_wb0e8")]
-position = Vector2(704, -20)
+[node name="Player" parent="." instance=ExtResource("5_8onw5")]
+position = Vector2(99, 831)

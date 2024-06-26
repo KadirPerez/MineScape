@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dt1jy4vrda0p7" path="res://assets/sprites/player.png" id="1_6otdu"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_7e8km"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsmbs"]
-size = Vector2(20.5, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfe83"]
+size = Vector2(20, 31)
 
 [sub_resource type="Animation" id="Animation_wiyv7"]
 length = 0.001
@@ -178,23 +178,25 @@ _data = {
 "win": SubResource("Animation_ittpi")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydkk1"]
-size = Vector2(13, 23)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h61fm"]
-size = Vector2(18.5, 30)
+size = Vector2(16, 23.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsmbs"]
+size = Vector2(25, 34)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_7e8km")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_yfe83")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6otdu")
 flip_h = true
 hframes = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.75, 2)
-shape = SubResource("RectangleShape2D_dsmbs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -202,19 +204,18 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="hitBoxDamage" type="Area2D" parent="."]
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBoxDamage"]
-position = Vector2(0.5, 1.5)
-shape = SubResource("RectangleShape2D_ydkk1")
-
 [node name="hitBoxEscalera" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBoxEscalera"]
-position = Vector2(0.75, 2)
+position = Vector2(1, 1.75)
 shape = SubResource("RectangleShape2D_h61fm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_dsmbs")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="hitBoxEscalera" to="." method="_on_hit_box_escalera_area_entered"]

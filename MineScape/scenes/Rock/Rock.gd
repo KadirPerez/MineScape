@@ -35,6 +35,7 @@ func apply_gravity(delta: float):
 	velocity.y += GRAVITY * delta
 
 func _on_hitbox_area_entered(area):
+	SignalManager.on_damage.emit()
 	set_physics_process(false)
 	sprite_2d.animation="destroy"
 	await (sprite_2d.animation_finished)

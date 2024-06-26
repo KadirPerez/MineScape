@@ -5,22 +5,24 @@ class_name Player
 @onready var anim_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 
-const MOVEMENT_SPEED : float = 300.0
+const MOVEMENT_SPEED : float = 200.0
 const SCALING_SPEED : float = 125.0
 const GRAVITY: float = 1200.0
-const JUMP_FORCE: float = 550.0
+const JUMP_FORCE: float = 300.0
 const HURT_JUMP_FORCE : float = -400.0
 
-enum PLAYER_STATES {IDLE, MOVE, FALL, JUMP, DEATH, WIN, CLIMB, SCALING_POSITION, TOUCH_FLOOD}
+enum PLAYER_STATES {IDLE, MOVE, FALL, JUMP, DEATH, WIN, CLIMB, SCALING_POSITION}
 var current_state: PLAYER_STATES = PLAYER_STATES.IDLE
-#var touch_flood : bool = false
 
 var colliding_lader = false # indica si el jugador se encuentra en la colision de la escalera
 var going_up = false #indica si el jugador esta sujetandose de la escalera
 
+
+
 func _physics_process(delta):
 	if not is_on_floor():
 		apply_gravity(delta)
+
 	get_input()
 	calculate_state()
 	move_and_slide()
@@ -29,18 +31,18 @@ func calculate_state():
 
 	#saber si esta en el suelo
 	if is_on_floor():
-		#saber si esta corriendo o quieto
-		if velocity.x > 0:
-			set_state(PLAYER_STATES.MOVE)
-		elif velocity.x < 0:
-			set_state(PLAYER_STATES.MOVE)
-		elif going_up:
-			if(velocity.y == 0): #esta quieto sujetandose de la escalera
-				set_state(PLAYER_STATES.SCALING_POSITION)
-			else: #esta subiendo o bajando de la escalera
-				set_state(PLAYER_STATES.CLIMB)
-		else:
-			set_state(PLAYER_STATES.IDLE)
+			#saber si esta corriendo o quieto
+			if velocity.x > 0:
+				set_state(PLAYER_STATES.MOVE)
+			elif velocity.x < 0 :
+				set_state(PLAYER_STATES.MOVE)
+			elif going_up:
+				if(velocity.y == 0): #esta quieto sujetandose de la escalera
+					set_state(PLAYER_STATES.SCALING_POSITION)
+				else: #esta subiendo o bajando de la escalera
+					set_state(PLAYER_STATES.CLIMB)
+			else:
+				set_state(PLAYER_STATES.IDLE)
 	#si no esta en el suelo, esta en el aire
 	else:
 		#El jugador esta cayendo
@@ -60,7 +62,6 @@ func set_state(new_state: PLAYER_STATES):
 	if new_state != current_state:
 	
 	#	if current_state == PLAYER_STATES.FALL and is_on_floor():
-		#	touch_flood = true
 		
 		current_state = new_state
 		match current_state:
@@ -78,6 +79,7 @@ func set_state(new_state: PLAYER_STATES):
 				anim_player.play("climb")
 			PLAYER_STATES.SCALING_POSITION:
 				anim_player.play("scaling_position")
+
 
 func get_input():
 	velocity.x = 0
@@ -110,27 +112,28 @@ func get_input():
 				
 	var max_pos_x = get_viewport().size.x
 	position.x = clampf(position.x, 0, max_pos_x)
+				
+
 
 func apply_gravity(delta: float):
 	velocity.y += GRAVITY * delta
 
+
 func _on_hit_box_escalera_area_entered(area):
 	area.get_name()
 	
-	if area.is_in_group("Ladder"):
+	if area.is_in_group("ladder"):
 		colliding_lader = true
 	
 
 func _on_hit_box_escalera_area_exited(area):
 	area.get_name()
 	
-	if area.is_in_group("Ladder"):
+	if area.is_in_group("ladder"):
 		colliding_lader = false
 		going_up = false
+
 
 func _on_area_win_area_entered(area):
 	print("GANASTES")
 	set_process(false) #se supone que detiene todos los procesos pero no funciona :(
-
-func _on_animation_player_animation_finished(touch_flood):
-	set_state(PLAYER_STATES.IDLE)

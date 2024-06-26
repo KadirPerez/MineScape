@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm3y61nsfhq81"]
+[gd_scene load_steps=8 format=3 uid="uid://cm3y61nsfhq81"]
 
 [ext_resource type="Script" path="res://scenes/lava/lava.gd" id="1_br50w"]
 [ext_resource type="Texture2D" uid="uid://bg86ry3mlubix" path="res://assets/sprites/lava.png" id="1_l43h4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15wml"]
+size = Vector2(1149, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofyls"]
 atlas = ExtResource("1_l43h4")
@@ -29,7 +32,13 @@ animations = [{
 size = Vector2(1152, 15)
 
 [node name="Lava" type="AnimatableBody2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_br50w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(577.5, -1191.5)
+shape = SubResource("RectangleShape2D_15wml")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(576, -608)
@@ -37,6 +46,10 @@ sprite_frames = SubResource("SpriteFrames_oo1ij")
 autoplay = "default"
 frame_progress = 0.997402
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(576, -1192.5)
 shape = SubResource("RectangleShape2D_8yot6")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_lava_entered"]
