@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 
 var _DIRECTION = Vector2.UP
-var _falling_speed: float = 10 : set = set_falling_speed, get = get_falling_speed
+var _falling_speed: float = 50 : set = set_falling_speed, get = get_falling_speed
 
 func _process(delta):
 	fall(delta)

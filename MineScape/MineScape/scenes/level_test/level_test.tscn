@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://wvr3rsg1y0ln"]
+[gd_scene load_steps=6 format=3 uid="uid://wvr3rsg1y0ln"]
 
 [ext_resource type="Texture2D" uid="uid://cpvesqvad1moq" path="res://assets/Terrain (16x16).png" id="1_j6hb6"]
 [ext_resource type="PackedScene" uid="uid://cntx6xeslwrwq" path="res://scenes/player/player.tscn" id="2_536km"]
+[ext_resource type="PackedScene" uid="uid://48g07nb01d6t" path="res://scenes/spwan_rock/spawn_rock.tscn" id="3_rrcb7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dlg3"]
 texture = ExtResource("1_j6hb6")
@@ -464,3 +465,6 @@ limit_bottom = 0
 
 [node name="Player" parent="." instance=ExtResource("2_536km")]
 position = Vector2(256, -204)
+
+[node name="SpawnRock" parent="." instance=ExtResource("3_rrcb7")]
+position = Vector2(485, -272)

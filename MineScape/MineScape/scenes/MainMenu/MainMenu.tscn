@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://b07r05d6kk0d4"]
 
-[ext_resource type="Texture2D" path="res://Assets Auxiliars/ALYiiE.png" id="1_sewr2"]
+[ext_resource type="Texture2D" uid="uid://rwq01oxjw806" path="res://assets/sprites/ALYiiE.png" id="1_sewr2"]
 [ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="1_skx85"]
-[ext_resource type="FontFile" uid="uid://g3hj1jxgvuy" path="res://Assets Auxiliars/FFFFORWA.TTF" id="2_r80mh"]
-[ext_resource type="Texture2D" uid="uid://da6qwmn61btwa" path="res://Assets Auxiliars/playButton.png" id="3_s5sox"]
-[ext_resource type="Texture2D" uid="uid://c125klxddoqru" path="res://Assets Auxiliars/quitButton.png" id="4_yycem"]
-[ext_resource type="FontFile" uid="uid://cyuw512ni1tkv" path="res://Assets Auxiliars/joystix monospace.otf" id="6_vexcb"]
+[ext_resource type="FontFile" uid="uid://cxtab4jpw6txr" path="res://assets/fonts/FFFFORWA.TTF" id="2_r80mh"]
+[ext_resource type="Texture2D" uid="uid://b0aabfyadgiot" path="res://assets/sprites/playButton.png" id="3_s5sox"]
+[ext_resource type="Texture2D" uid="uid://c7m5sts0u1rbd" path="res://assets/sprites/quitButton.png" id="4_yycem"]
+[ext_resource type="FontFile" uid="uid://chdh2neh3g2w2" path="res://assets/fonts/joystix monospace.otf" id="6_vexcb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mec6p"]
 font = ExtResource("2_r80mh")
