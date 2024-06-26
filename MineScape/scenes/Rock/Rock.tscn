@@ -172,7 +172,7 @@ shape = SubResource("CircleShape2D_lq5of")
 target_position = Vector2(-15, 0)
 
 [node name="hitbox" type="Area2D" parent="WallDetection"]
-collision_layer = 2
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetection/hitbox"]
 rotation = -1.5708
