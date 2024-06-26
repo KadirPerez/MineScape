@@ -9,6 +9,8 @@ const MOVEMENT_SPEED : float = 150.0
 enum FACING_DIRECTION {LEFT = -1, RIGHT = 1}
 var current_direction = FACING_DIRECTION.LEFT
 
+const SCORE : int = 5
+
 func _physics_process(delta):
 	if not is_on_floor():
 		apply_gravity(delta)
@@ -40,3 +42,7 @@ func _on_hitbox_area_entered(area):
 	sprite_2d.animation="destroy"
 	await (sprite_2d.animation_finished)
 	queue_free()
+
+func _on_hit_box_puntos_area_entered(area):
+	SignalManager.on_item_grabbed.emit(SCORE) # Emit para mandar el Score predefinido
+	print("El psj pasó por el area")

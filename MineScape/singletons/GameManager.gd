@@ -10,6 +10,7 @@ func load_game_over__scene():
 
 func _ready():
 	SignalManager.on_damage.connect(on_damage)
+	SignalManager.on_item_grabbed.connect(on_item_grabbed)
 
 func on_damage():
 	global_lives -= 1
@@ -18,4 +19,7 @@ func on_damage():
 		load_game_over__scene()
 		SignalManager.on_game_over.emit()
 
+func on_item_grabbed(score: int):
+	global_score += score
+	SignalManager.on_updated_score.emit(global_score)
 

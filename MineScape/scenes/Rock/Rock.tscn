@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://u32meuoukwua"]
+[gd_scene load_steps=27 format=3 uid="uid://u32meuoukwua"]
 
 [ext_resource type="Script" path="res://scenes/Rock/Rock.gd" id="1_yeuo4"]
 [ext_resource type="Texture2D" uid="uid://dftx5midsaxji" path="res://assets/sprites/Explocion.png" id="2_mglge"]
@@ -157,6 +157,9 @@ radius = 12.0416
 radius = 14.0
 height = 28.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3roi"]
+size = Vector2(2, 28)
+
 [node name="Rock" type="CharacterBody2D"]
 script = ExtResource("1_yeuo4")
 
@@ -181,4 +184,12 @@ shape = SubResource("CapsuleShape2D_jd0f3")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HitBoxPuntos" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxPuntos"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_i3roi")
+
 [connection signal="area_entered" from="WallDetection/hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="HitBoxPuntos" to="." method="_on_hit_box_puntos_area_entered"]
