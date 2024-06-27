@@ -5,7 +5,7 @@ class_name Player
 @onready var anim_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 
-const MOVEMENT_SPEED : float = 200.0
+var MOVEMENT_SPEED : float = 200.0
 const SCALING_SPEED : float = 125.0
 const GRAVITY: float = 1200.0
 const JUMP_FORCE: float = 300.0
@@ -16,19 +16,28 @@ var current_state: PLAYER_STATES = PLAYER_STATES.IDLE
 
 var colliding_lader = false # indica si el jugador se encuentra en la colision de la escalera
 var going_up = false #indica si el jugador esta sujetandose de la escalera
+var initial_position: Vector2
 
+func _ready():
+	initial_position = position
 
+func set_movement_speed(new_speed: float):
+	MOVEMENT_SPEED = new_speed
+
+func get_movement_speed() -> float:
+	return MOVEMENT_SPEED
+
+func reset_position():
+	position = initial_position
 
 func _physics_process(delta):
 	if not is_on_floor():
 		apply_gravity(delta)
-
 	get_input()
 	calculate_state()
 	move_and_slide()
 
 func calculate_state():
-
 	#saber si esta en el suelo
 	if is_on_floor():
 			#saber si esta corriendo o quieto

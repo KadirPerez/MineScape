@@ -1,13 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2imiycw0ofx0"]
+[gd_scene load_steps=12 format=3 uid="uid://c2imiycw0ofx0"]
 
 [ext_resource type="Texture2D" uid="uid://h2eykyeh7u2k" path="res://assets/tilemap/Terrain (16x16).png" id="1_22gtk"]
-[ext_resource type="Script" path="res://scenes/mine/mine.gd" id="1_ys5qp"]
 [ext_resource type="Texture2D" uid="uid://dy8i0lvss77t3" path="res://assets/sprites/lava_bg.jpg" id="2_563aq"]
 [ext_resource type="PackedScene" uid="uid://cm3y61nsfhq81" path="res://scenes/lava/lava.tscn" id="3_gfwwu"]
 [ext_resource type="PackedScene" uid="uid://dyh05m5qhp2qs" path="res://scenes/ladder/ladder.tscn" id="4_nnwi0"]
 [ext_resource type="PackedScene" uid="uid://cntx6xeslwrwq" path="res://scenes/player/player.tscn" id="5_8onw5"]
-[ext_resource type="PackedScene" uid="uid://vhg15e13o0pc" path="res://scenes/HUD/HUD.tscn" id="6_y3mhy"]
+[ext_resource type="PackedScene" uid="uid://n1ocbdqletbd" path="res://scenes/hud/hud.tscn" id="7_0uyqr"]
 [ext_resource type="PackedScene" uid="uid://48g07nb01d6t" path="res://scenes/spwan_rock/spawn_rock.tscn" id="7_wb0e8"]
+[ext_resource type="PackedScene" uid="uid://cpacbmo71ep7r" path="res://scenes/bandera/bandera.tscn" id="8_gv0bl"]
+
+[sub_resource type="GDScript" id="GDScript_dlty7"]
+script/source = "extends Node2D
+
+@onready var player = $Player
+@onready var lava = $Lava
+
+func _ready():
+	SignalManager.on_win.connect(on_win)
+	SignalManager.on_restart.emit()
+
+func on_win():
+	reset_game()
+	
+func reset_game():
+	player.reset_position()
+	
+
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kiwcl"]
 texture = ExtResource("1_22gtk")
@@ -489,7 +508,7 @@ sources/0 = SubResource("TileSetAtlasSource_kiwcl")
 
 [node name="Mine" type="Node2D"]
 position = Vector2(-1, 6)
-script = ExtResource("1_ys5qp")
+script = SubResource("GDScript_dlty7")
 
 [node name="MarginContainerBG" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -505,6 +524,10 @@ grow_vertical = 2
 [node name="BackgroundTexture" type="TextureRect" parent="MarginContainerBG"]
 layout_mode = 2
 texture = ExtResource("2_563aq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("7_0uyqr")]
 
 [node name="piso" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_333xw")
@@ -530,17 +553,19 @@ position = Vector2(31, 703)
 position = Vector2(961, 831)
 
 [node name="SpawnRock" parent="." instance=ExtResource("7_wb0e8")]
-position = Vector2(704, -20)
+position = Vector2(719, 91)
 
-[node name="SpawnRock" parent="SpawnRock" instance=ExtResource("7_wb0e8")]
-position = Vector2(191, 597)
+[node name="SpawnRock5" parent="." instance=ExtResource("7_wb0e8")]
+position = Vector2(766, 617)
+
+[node name="SpawnRock2" parent="." instance=ExtResource("7_wb0e8")]
+position = Vector2(741, 341)
 
 [node name="Lava" parent="." instance=ExtResource("3_gfwwu")]
-position = Vector2(-79, 2206)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("6_y3mhy")]
+position = Vector2(-60, 2356)
 
 [node name="Player" parent="." instance=ExtResource("5_8onw5")]
-position = Vector2(324, 592)
+position = Vector2(54, 821)
+
+[node name="Bandera" parent="." instance=ExtResource("8_gv0bl")]
+position = Vector2(909, 89)
